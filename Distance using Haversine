@@ -1,0 +1,31 @@
+/*
+ * Calculate distance between two points on the globe. First input = latitude of location 1. second input = longitude of location 1.
+ * Third input = latitude of location 2. Fourth input = longitude of location 2. Find the distance between them using trigonometry. 
+ * Assume the radius of the earth is 6,371km and the earth is a sphere. Round your answer to the nearest 100km.
+ */
+import java.util.Scanner;
+public class distances {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		 
+		// first location (lat1, lon1) , second location (lat2, lon2)
+		double lat1 = Math.toRadians(sc.nextDouble());
+		double lon1 = Math.toRadians(sc.nextDouble());
+		double lat2 = Math.toRadians(sc.nextDouble());
+		double lon2 = Math.toRadians(sc.nextDouble());
+		// Radius of earth in kilometers.
+		double rad = 6371;
+		
+		// Im using the Haversine formula  
+        double dlon = lon2 - lon1;  
+        double dlat = lat2 - lat1;    
+        double a = Math.acos((Math.sin(lat1)*Math.sin(lat2)) + (Math.cos(lat1)*Math.cos(lat2)*Math.cos(dlon)));
+        double dis = a * rad;
+        
+        //lets round
+    	double num3 = Math.round(dis/100)*100;
+    	
+        System.out.println((int)num3); //parse answer as an int
+        
+	}
+}
