@@ -1,0 +1,66 @@
+/**
+ * Take in a decimal number. output the number of bases from base2 to base 10 in which its palindromic.
+ * e.g. 585 is palindromic in base10, in base2 (1001001001) and in base8 (1111). 585 will therefore output 3
+ */
+import java.util.Scanner;
+public class PalindromeBase {
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int num1 = sc.nextInt();
+		int count = 0;
+		
+		if(base(num1, 2) == true) {
+			count++;
+		}
+		if(base(num1, 3) == true) {
+			count++;
+		}
+		if(base(num1, 4) == true) {
+			count++;
+		}
+		if(base(num1, 5) == true) {
+			count++;
+		}
+		if(base(num1, 6) == true) {
+			count++;
+		}
+		if(base(num1, 7) == true) {
+			count++;
+		}
+		if(base(num1, 8) == true) {
+			count++;
+		}
+		if(base(num1, 9) == true) {
+			count++;
+		}
+		if(base(num1, 10) == true) {
+			count++;
+		}
+		System.out.println(count);
+	}
+	
+	public static boolean base(int num1, int num2) {
+			String s1 = convert(num1, num2);
+			String reverse = "";   
+	      for ( int i = s1.length()-1 ; i >= 0; i--) {  
+	         reverse = reverse + s1.charAt(i);  
+	      }
+	      if (s1.equals(reverse)) {
+	    	  return true;
+	      }    
+	      else {
+	    	  return false;
+	      }
+	}
+
+	 public static String convert(int num, int base) {
+		 if (num == 0) {
+			 return "";
+		 }
+		 else {
+			 return convert(num / base, base) + (num % base);
+		 }
+	 }
+	}
+
