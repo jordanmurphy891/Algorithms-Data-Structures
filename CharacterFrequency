@@ -1,0 +1,75 @@
+/*This lab entailed taking a string from input. Then, the letter with the highest frequency is printed out with its frequency
+beside it. This is followed by the next highest frequency etc. If any characters have the same frequency, the one with
+the higher ASCII value is printed out first.
+*/
+import java.util.Scanner;
+public class CharacterFrequency
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		String word = sc.nextLine();
+		//lets put the word into a char array
+		char[] wordArray = new char[word.length()]; //make array
+		for (int i = 0; i < word.length(); i++)//fill array with characters from input
+		{ 
+    		wordArray[i] = word.charAt(i); //this has our word in an array, easy to work with
+    	}
+		//make a second array to record frequencies
+		int freq[] = new int[word.length()];
+		
+		for(int i = 0; i < word.length() ; i++)
+		{
+			freq[i] = 1;
+			for(int j = i+1 ; j < word.length(); j++)
+			{
+				if(wordArray[i] == wordArray[j])
+				{
+					freq[i]++;
+					wordArray[j] = '*'; //this avoids printing this later
+				}
+			}
+		}
+		//lets now bubble sort the freq array
+		int temp1 = 0;
+		char temp2;
+		for(int i = 1; i < freq.length ; i++)
+		{
+			for(int j = 0 ; j <freq.length-1 ; j++)
+			{
+				if(freq[j]<freq[j+1])
+				{
+					temp1 = freq[j]; //sort the array with numbers
+					freq[j] = freq[j+1];
+					freq[j+1]=temp1;
+					
+					temp2 = wordArray[j]; //sort the array with letters
+					wordArray[j] = wordArray[j+1];
+					wordArray[j+1] = temp2;
+				}
+				if(freq[j] == freq[j+1])//if the freqs are the same
+				{
+					int ascii1 = wordArray[j];
+					int ascii2 = wordArray[j+1];
+					if(ascii1 > ascii2)
+					{
+						temp1 = freq[j]; //sort array with numbers
+						freq[j] = freq[j+1];
+						freq[j+1] = temp1;
+						
+						temp2 = wordArray[j]; //sort array with letters
+						wordArray[j] = wordArray[j+1];
+						wordArray[j+1] = temp2;
+					}
+				}
+			}
+		}
+		for(int i = 0; i<word.length() ; i++)
+		{
+			if(wordArray[i] != '*')
+			{
+				System.out.println(wordArray[i]+" "+freq[i]);
+			}
+		}
+	}
+}
