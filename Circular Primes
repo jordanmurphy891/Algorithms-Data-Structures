@@ -1,0 +1,55 @@
+/*
+	given an input number x, output all the circular prime numbers between 0 and x. a circular prime is a prime number
+	no matter how the number is rearranged. e.g. 197 is circular prime because 197, 971, 719 etc are all prime.
+*/
+import java.util.Scanner;
+public class Lab11CircularPrimes {
+	
+    public static void main(String[] args) {
+    	Scanner sc = new Scanner (System.in);
+    	int max = sc.nextInt();
+        int count = 0;         
+        for (int i = 2; i < max; i++){
+        	if(isprime(i)){
+        		String num=i+"";
+        		boolean a = false;
+        		String temp = num;
+        		for (int j = 0; j < num.length(); j++) {
+        			temp = temp.charAt(temp.length() - 1) + temp;
+        			temp = temp.substring(0, temp.length() - 1);
+        			if(!isprime(Integer.parseInt(temp))){
+        				a=false;
+        				break; 
+        			}
+        			else{
+        				a=true;
+        			}
+        		}
+        		if(a){
+        			count++;
+        		}
+        	}   
+        }
+       System.out.println(count);
+    }
+    
+    static boolean isprime(int num){
+            boolean prime = true;
+            if (num == 2) {
+                prime = true;
+            } 
+            else if (num % 2 == 0) {
+                prime = false;
+            } 
+            else {
+                for(int j = 3; j <= Math.sqrt(num); j++){
+                    if (num % j == 0){
+                        prime = false;
+                    }
+                }
+            }
+      return prime; 
+    }
+    
+}
+
